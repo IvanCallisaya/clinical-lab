@@ -28,18 +28,21 @@
               <th>Nombre de del asociado</th>
               <th>Correo electrónico</th>
               <th>Teléfono</th>
+              <th>Membresia</th>
               <th>Dirección</th>
               <th>Estado</th>
               <th>Editar</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(value, index) in customers.data" v-bind:key="index">
+            <tr v-for="(value, index) in members.data" v-bind:key="index">
+              <td>{{ value.ci }}</td>
               <td>{{ value.customer_name }}</td>
               <td>{{ value.email }}</td>
               <td>{{ value.phone }}</td>
+              <td>{{ value.membresy_type }}</td>
               <td>{{ value.address }}</td>
-              <td>{{ value.total_amount }}</td>
+              <td>{{ value.status }}</td>
 
               <td>
                 <button @click="editcustomer(value.id)" type="button"
@@ -52,10 +55,10 @@
         </table>
       </div>
 
-      <pagination :pageData="customers"></pagination>
+      <pagination :pageData="members"></pagination>
 
       <div class="row">
-        <update-customer></update-customer>
+        <update-member></update-member>
       </div>
     </div>
   </div>
@@ -65,31 +68,32 @@
 import { EventBus } from "../../vue-asset";
 import mixin from "../../mixin";
 
-import UpdateCustomer from "./UpdateCustomer.vue";
+import UpdateMember from "./UpdateMember.vue";
 import Pagination from '../pagination/pagination.vue';
 
 export default {
   mixins: [mixin],
 
   components: {
-    "update-customer": UpdateCustomer,
+    "update-member": UpdateMember,
     "pagination": Pagination,
   },
 
   data() {
     return {
-      customers: [],
+      members: [],
       name: "",
       email: "",
       phone: "",
       isLoading: true,
+      userId: null,
     };
   },
   created() {
     var _this = this;
     this.getData();
 
-    EventBus.$on("customer-created", function () {
+    EventBus.$on("member-created", function () {
       _this.getData();
     });
   },
@@ -97,10 +101,12 @@ export default {
   methods: {
     getData(page = 1) {
       this.isLoading = true;
+      console.log(base_url);
+
       axios
         .get(
           base_url +
-          "customer-list?page=" +
+          "member-list?page=" +
           page +
           "&name=" +
           this.name +
@@ -108,22 +114,25 @@ export default {
           this.email +
           "&phone=" +
           this.phone
-        )
-        .then(response => {
-          // console.log(response.data);
+        ).then((response) => {
+           console.log(response.data);
 
-          this.customers = response.data;
+          this.members = response.data;
           this.isLoading = false;
         })
+
         .catch(error => {
           console.log(error);
+
         });
     },
+
+
 
     // edit vendor
 
     editcustomer(id) {
-      EventBus.$emit("customer-edit", id);
+      EventBus.$emit("member-edit", id);
     },
 
     showMessage(data) {
@@ -141,8 +150,7 @@ export default {
 
   computed: {
 
+  },
 
-
-  }
 };
 </script>

@@ -12,7 +12,7 @@
 
         <div class="row clearfix">
         	
-        	<create-customer></create-customer>
+        	<create-member></create-member>
 
         </div>
 
@@ -27,13 +27,13 @@
                             </h2> -->
                           
                           <h2>
-                          	 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-customer">
-                                Cliente nuevo
+                          	 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-member">
+                                Asociado nuevo
                              </button>
                           </h2>
                         </div>
 
-                        <view-customer></view-customer>
+                        <view-member></view-member>
 
                     </div>
                 </div>
@@ -46,6 +46,6 @@
 
 @push('script')
 
-<script type="text/javascript" src="{{ url('public/js/customer.js') }}"></script>
+<script type="text/javascript" src="{{ url('public/js/member.js') }}"></script>
 
 @endpush

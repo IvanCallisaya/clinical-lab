@@ -50,6 +50,7 @@
     <!-- Bootstrap Datepicker Plugin Js -->
     <script src="{{ url('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 
+    <script src="{{ url('plugins/autosize/autosize.js') }}"></script>
     <script src="{{ url('js/pages/forms/basic-form-elements.js') }}"></script>
         <script src="{{ url('js/admin.js') }}"></script>
     <script src="{{ url('js/select2.min.js') }}"></script>

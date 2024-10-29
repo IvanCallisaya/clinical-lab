@@ -9,6 +9,10 @@
  get and post mehod for update and delete
 |
 */
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware'=> ['auth','check.permission']],function(){
 
 
@@ -51,6 +55,13 @@ Route::resource('customer','CustomerController');
 Route::get('customer/delete/{id}','CustomerController@destroy');
 Route::post('customer/update/{id}','CustomerController@update');
 Route::get('customer-list','CustomerController@CustomerList');
+
+// member 
+Route::resource('member','MemberController');
+Route::get('member/delete/{id}','MemberController@destroy');
+Route::post('member/update/{id}','MemberController@update');
+Route::get('member-list','MemberController@MemberList');
+
 
 //Stock
 
@@ -114,6 +125,7 @@ Route::get('user-role','RoleController@userRole');
 
 
 Route::get('logout','UserController@logout');
+Route::get('get-user','UserController@getUser');
 
 });
 
